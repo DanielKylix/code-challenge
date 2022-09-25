@@ -6,6 +6,8 @@ import AddTransactionForm from "./AddTransactionForm";
 function AccountContainer() {
   const url = "http://localhost:8001";
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
+
 
   useEffect(() => {
     getData();
@@ -33,7 +35,6 @@ function AccountContainer() {
       .then((data) => console.log(data));
   };
 
-  const [search, setSearch] = useState("");
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
@@ -48,13 +49,13 @@ function AccountContainer() {
 
       return description.includes(terms) || category.includes(terms);
     });
-    setData({ transactions: filtered });
+    setData(filtered );
   };
   return (
     <div>
       <Search handleChange={handleSearchChange} search={search} />
       <AddTransactionForm addTransaction={addData} />
-      <TransactionsList transactions={data} search={search} />
+      <TransactionsList transactions={data}  />
     </div>
   );
 }
